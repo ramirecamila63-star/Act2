@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cola de Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Cola de Clientes</h1>
+    
+    {% if clientes %}
+        <ul>
+            {% for cliente in clientes %}
+                <li>{{ cliente.turno }} - {{ cliente.nombre }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay clientes en espera</p>
+    {% endif %}
+    
+    <form action="/atender" method="GET">
+        <button type="submit">Atender Siguiente Cliente</button>
+    </form>
+    
+    <!-- Nuevo formulario para agregar clientes -->
+    <h2>Agregar Nuevo Cliente</h2>
+    <form action="/agregar" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre del cliente" required>
+        <button type="submit">Agregar a la Cola</button>
+    </form>
+</body>
+</html>
